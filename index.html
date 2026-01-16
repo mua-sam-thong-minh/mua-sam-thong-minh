@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <!-- BUILD_ID: 20260116162910 (Fetch API) -->
+    <!-- ORIGINAL BUILD_ID: 1768538101 -->
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <base href="/FlashSale-Shopee/">
+        <title>⚡ FlashSale Shopee</title>
+        <!-- Manrope (gần giống Lazada / Euclid Circular A) -->
+        <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <style>
+            * {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0
+            }
+
+            /* =====================================================
+   GLOBAL
+===================================================== */
+            body {
+                font-family: "Manrope",sans-serif;
+                background: #f5f5f5;
+            }
+
+            /* =====================================================
+   MOBILE MODE = HTML 1 (DEFAULT)
+===================================================== */
+            .container {
+                max-width: 1240px;
+                margin: 0 auto;
+                padding: 0 8px;
+            }
+
+            /* TITLE */
+            h1 {
+                text-align: center;
+                color: #ee4d2d;
+                font-size: 2.2rem;
+                margin: 12px 0 8px;
+                font-weight: 800;
+            }
+
+            .flash-note {
+                text-align: center;
+                font-size: 0.9rem;
+                line-height: 1.5;
+                color: #555;
+                margin-bottom: 4px;
+            }
+
+            .flash-note strong {
+                color: #111
+            }
+
+            .flash-note a {
+                color: #ee4d2d;
+                font-weight: 700;
+                text-decoration: none;
+            }
+
+            /* =====================================================
+   FILTER – MOBILE
+===================================================== */
+            .panel {
+                background: #fff;
+                padding: 10px;
+                margin: 0 -8px 16px;
+                box-shadow: 0 1px 4px rgba(0,0,0,.08);
+            }
+
+            .grid-filter {
+                display: grid;
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            label {
+                font-size: 1rem;
+                font-weight: 600;
+                margin-bottom: 6px;
+            }
+
+            select, input {
+                width: 100%;
+                padding: 10px;
+                font-size: 0.95rem;
+                border: 1px solid #999;
+                border-radius: 8px;
+            }
+
+            /* ===== SELECT ARROW FIX – MOBILE ===== */
+            select {
+                appearance: none;
+                -webkit-appearance: none;
+                -moz-appearance: none;
+                background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'><path d='M7 10l5 5 5-5z'/></svg>");
+                background-repeat: no-repeat;
+                background-position: right 8px center;
+                background-size: 24px;
+                /* 👈 CHÍNH LÀ CHỖ NÀY */
+                padding-right: 8px;
+                /* 👈 chừa chỗ cho mũi tên */
+            }
+
+            /* =====================================================
+   GRID – MOBILE
+===================================================== */
+            .grid {
+                display: grid;
+                grid-template-columns: repeat(2,1fr);
+                gap: 8px;
+            }
+
+            /* =====================================================
+   CARD – MOBILE (HTML 1 CHUẨN)
+===================================================== */
+            .card {
+                background: #fff;
+                border-radius: 8px;
+                overflow: hidden;
+                border: 0.8px solid #111;
+                display: flex;
+                flex-direction: column;
+                position: relative;
+                display: block;
+                /* 👈 bỏ flex-column cho mobile */
+            }
+
+            .card a {
+                aspect-ratio: 1 / 1;
+                /* 👈 ảnh vuông */
+                width: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                overflow: hidden;
+                padding: 8px;
+            }
+
+            .card img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                border-radius: 8px;
+            }
+
+            /* BADGE */
+            .badge {
+                position: absolute;
+                top: 4px;
+                left: 4px;
+                background: #e60000;
+                color: #fff;
+                font-size: 3.5cqw;
+                padding: 0.2em 0.4em;
+                border-radius: 4px;
+                font-weight: 700;
+            }
+
+            .shop-badge {
+                position: absolute;
+                top: 4px;
+                right: 4px;
+                background: #d0011b;
+                color: #fff;
+                font-size: .75rem;
+                padding: 3px 7px;
+                border-radius: 4px;
+                font-weight: 700;
+            }
+
+            /* MÀU SHOP BADGE */
+            .shop-badge.mall {
+                background: #d0011b;
+                /* 🔴 Mall */
+            }
+
+            .shop-badge.preferred, .shop-badge.preferred-plus {
+                background: #ee4d2d;
+                /* 🟠 Yêu thích / Yêu thích + */
+            }
+
+            /* INFO */
+            .product-info {
+                padding: 8px;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                flex: 0 0 auto;
+                /* 👈 chỉ cao đúng nội dung */
+                min-height: unset;
+                /* 👈 bỏ ép chiều cao */
+            }
+
+            .name {
+                font-size: .80rem;
+                font-weight: 700;
+                line-height: 1.3;
+                height: 2.6em;
+                /* 👈 KHÓA CỨNG 2 DÒNG */
+                overflow: hidden;
+                display: -webkit-box;
+                -webkit-line-clamp: 2;
+                /* 👈 CHỈ 2 DÒNG */
+                -webkit-box-orient: vertical;
+            }
+
+            .price-container {
+                display: flex;
+                align-items: baseline;
+                gap: 6px;
+            }
+
+            .price {
+                font-size: 1.0rem;
+                font-weight: 800;
+                color: #d0011b;
+            }
+
+            .before {
+                font-size: .85rem;
+                color: #999;
+                text-decoration: line-through;
+            }
+
+            .meta {
+                font-size: .78rem;
+                color: #666;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                line-height: 1.4;
+                /* 👈 CHỐT: giữ chỗ cố định */
+                justify-content: flex-start;
+            }
+
+            .join-center {
+                position: relative;
+                width: fit-content;
+                margin: 10px auto;
+                /* 👈 CHỈ BUTTON ĐƯỢC CĂN GIỮA */
+            }
+
+            /* BUTTON */
+            .join-btn {
+                display: inline-block;
+                padding: 10px 18px;
+                font-size: 1rem;
+                font-weight: 700;
+                background: #1da1f2;
+                /* 🔵 XANH */
+                color: #fff;
+                border-radius: 8px;
+                text-decoration: none;
+                box-shadow: 0 4px 10px rgba(29,161,242,.35);
+            }
+
+            /* BÀN TAY */
+            .hand {
+                position: absolute;
+                left: -40px;
+                /* 👈 NẰM CẠNH BUTTON */
+                top: 50%;
+                transform: translateY(-50%);
+                font-size: 22px;
+            }
+
+            /* =====================================================
+   DESKTOP MODE = HTML 1 (≥1025px)
+===================================================== */
+            @media (min-width: 1025px) {
+                /* BIẾN CHUNG */ :root {
+                    --gap: clamp(10px,1.5vw,16px);
+                    --col: calc((100% - 5 * var(--gap)) / 6);
+                }
+
+                /* CONTAINER */
+                .container {
+                    max-width: calc(6 * var(--col) + 5 * var(--gap));
+                    padding: 0;
+                }
+
+                /* TITLE */
+                h1 {
+                    font-size: 3.3rem;
+                }
+
+                .flash-note {
+                    font-size: 1.35rem;
+                    line-height: 1.6;
+                }
+
+                /* PANEL */
+                .panel {
+                    padding: 16px;
+                    border-radius: 12px;
+                    width: 100%;
+                    margin: 0 auto 20px;
+                }
+
+                /* FILTER */
+                .grid-filter {
+                    grid-template-columns: 1fr 1fr;
+                    gap: 24px 40px;
+                }
+
+                label {
+                    font-size: 1.2vw;
+                }
+
+                select, input {
+                    width: calc(2 * var(--col) + var(--gap));
+                    font-size: 1.2cqw;
+                    padding: .6em .8em;
+                }
+
+                /* GRID */
+                .grid {
+                    grid-template-columns: repeat(6,var(--col));
+                    gap: var(--gap);
+                }
+
+                /* CARD DESKTOP */
+                .card {
+                    border-radius: 15px;
+                    padding: 8px;
+                    border: 1.4px solid #000;
+                    container-type: inline-size;
+                    transition: transform .25s ease, box-shadow .25s ease;
+                }
+
+                .card a {
+                    padding: 3%;
+                }
+
+                .card img {
+                    object-fit: cover;
+                    border-radius: 15px;
+                }
+
+                .card:hover {
+                    transform: scale(1.04);
+                    z-index: 5;
+                    box-shadow: 0 14px 32px rgba(0,0,0,.18);
+                }
+
+                /* TEXT SCALE */
+                .name {
+                    font-size: clamp(13px,6cqw,32px);
+                }
+
+                .price {
+                    font-size: clamp(14px,8cqw,32px);
+                }
+
+                .before, .meta {
+                    font-size: clamp(14px,7cqw,36px);
+                }
+
+                /* BADGE DESKTOP */
+                .badge {
+                    font-size: 6cqw;
+                    padding: .4em .7em;
+                    border-radius: 10px;
+                }
+            }
+
+            /* =====================================================
+   TO TOP
+===================================================== */
+            #toTop {
+                position: fixed;
+                bottom: 70px;
+                right: 16px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: #ee4d2d;
+                color: #fff;
+                border: none;
+                font-size: 1.6rem;
+                display: none;
+                box-shadow: 0 4px 12px rgba(0,0,0,.2);
+                z-index: 999;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Flashsale Shopee</h1>
+            <div class="flash-note">
+                ⚡ <strong>SĂN DEAL 1K, 9K, DEAL HOT, LỖI GIÁ </strong>
+                <br>Tham gia cộng đồng Telegram để cập nhật thêm deal FLASHSALE các khung giờ
+
+            </div>
+            <div class="join-center">
+                <span class="hand">👉  </span>
+                <a href="https://t.me/dealhotday" target="_blank" class="join-btn">Tham gia ngay
+  </a>
+            </div>
+            <form class="panel" onsubmit="return false;">
+                <div class="grid-filter">
+                    <div>
+                        <label>Chọn khung giờ</label>
+                        <select name="slot"></select>
+                    </div>
+                    <div>
+                        <label>Tìm kiếm sản phẩm</label>
+                        <input name="q" value="">
+                    </div>
+                    <div>
+                        <label>Lọc theo</label>
+                        <select name="filter">
+                            <option value="all" selected>Mọi sản phẩm
+          </option>
+                            <option value="mall">Shop Mall
+          </option>
+                            <option value="remove_1k">Bỏ Deal 1K
+          </option>
+                            <option value="rating49">Trên 4.9⭐
+          </option>
+                        </select>
+                    </div>
+                </div>
+            </form>
+            <div class="grid" id="grid"></div>
+            <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+            <script>
+                let ITEMS = [];
+
+async function loadProducts() {
+  try {
+    const response = await fetch('data/products.json');
+    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+    ITEMS = await response.json();
+    console.log(`✅ Loaded ${ITEMS.length} products`);
+    
+    // Render products after loading
+    if (typeof renderProducts === 'function') {
+      renderProducts();
+    } else if (typeof init === 'function') {
+      init();
+    }
+  } catch (error) {
+    console.error('❌ Error loading products:', error);
+    document.body.innerHTML = `
+      <div style="text-align: center; padding: 50px; font-family: Arial;">
+        <h2>⚠️ Không thể tải dữ liệu sản phẩm</h2>
+        <p>Vui lòng thử lại sau hoặc liên hệ admin.</p>
+        <p style="color: #999; font-size: 0.9em;">Error: ${error.message}</p>
+      </div>
+    `;
+  }
+}
+
+// Load when page is ready
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', loadProducts);
+} else {
+  loadProducts();
+}
+            </script>
+            <script>
+                const btn = document.getElementById("toTop");
+                window.addEventListener("scroll", () => {
+                    btn.style.display = window.scrollY > 400 ? "block" : "none";
+                }
+                );
+            </script>
+            <script>
+                (async function() {
+                    /* ========= ELEMENT ========= */
+                    const slotSelect = document.querySelector("select[name='slot']");
+                    const filterSelect = document.querySelector("select[name='filter']");
+                    const input = document.querySelector("input[name='q']");
+                    if (!slotSelect || !filterSelect || !input)
+                        return;
+                    /* ========= LẤY STATE TỪ URL ========= */
+                    const urlParams = new URLSearchParams(location.search);
+                    const qFromUrl = urlParams.get("q") || "";
+                    input.value = qFromUrl;
+                    /* ========= SLOT / FILTER ========= */
+                    const parts = location.pathname.split("/").filter(Boolean);
+                    const currentSlot = parts.length >= 2 ? parts[parts.length - 2] : "";
+                    const currentFilter = parts.length >= 1 ? parts[parts.length - 1].replace(".html", "") : "all";
+                    // load slots.json
+                    let slots = [];
+                    try {
+                        const res = await fetch(`/FlashSale-Shopee/slots.json?v=1768538101`);
+                        slots = await res.json();
+                    } catch (e) {
+                        console.error("Không load được slots.json", e);
+                        return;
+                    }
+                    // build slot dropdown
+                    for (const s of slots) {
+                        const opt = document.createElement("option");
+                        opt.value = s.file;
+                        opt.textContent = s.label;
+                        if (s.file === currentSlot)
+                            opt.selected = true;
+                        slotSelect.appendChild(opt);
+                    }
+                    filterSelect.value = currentFilter;
+                    /* ========= ĐỔI SLOT / FILTER (GIỮ SEARCH) ========= */
+                    function go() {
+                        const q = input.value.trim();
+                        const params = new URLSearchParams();
+                        if (q)
+                            params.set("q", q);
+                        const BASE = "/FlashSale-Shopee";
+                        const slot = slotSelect.value;
+                        const filter = filterSelect.value || "all";
+                        // 👈 CHỐT LỖI Ở ĐÂY
+                        location.href = `${BASE}/${slot}/${filter}.html` + (params.toString() ? `?${params}` : "");
+                    }
+                    slotSelect.addEventListener("change", go);
+                    filterSelect.addEventListener("change", go);
+                }
+                )();
+            </script>
+            <script>
+                /* ========= ELEMENT ========= */
+                const grid = document.getElementById("grid");
+                const searchInput = document.querySelector("input[name='q']");
+                /* ========= URL STATE ========= */
+                const urlParams = new URLSearchParams(location.search);
+                const qFromUrl = (urlParams.get("q") || "").toLowerCase();
+                /* ========= CONFIG ========= */
+                const BATCH_SIZE = 40;
+                let cursor = 0;
+                /* ========= DATA ========= */
+                let baseItems = ITEMS;
+                let filteredItems = [];
+                /* ========= RENDER ========= */
+                function renderNextBatch() {
+                    if (cursor >= filteredItems.length)
+                        return;
+                    const slice = filteredItems.slice(cursor, cursor + BATCH_SIZE);
+                    cursor += BATCH_SIZE;
+                    const html = slice.map(it => `
+    <div class="card">
+      ${it.discount ? `<div class="badge">-${it.discount}%</div>` : ""}
+      ${it.is_mall ? `<div class="shop-badge mall">Mall</div>` : ""}
+      ${it.is_preferred_plus ? `<div class="shop-badge preferred-plus">Yêu thích +</div>` : ""}
+      ${it.is_preferred ? `<div class="shop-badge preferred">Yêu thích</div>` : ""}
+
+      <a href="${it.url}" target="_blank">
+        <img src="${it.img}" loading="lazy">
+      </a>
+
+      <!-- 👇 THÊM product-info -->
+      <div class="product-info">
+
+        <div class="name">${it.name}</div>
+
+        <div class="price-container">
+          <span class="price">${it.price.toLocaleString()}₫</span>
+          <span class="before">${it.before.toLocaleString()}₫</span>
+        </div>
+
+        <div class="meta">
+          <div>📦 Kho ${it.stock}</div>
+          <div>⭐ ${it.rating}/5 (${it.rating_count} đánh giá)</div>
+        </div>
+
+      </div>
+    </div>
+  `).join("");
+                    grid.insertAdjacentHTML("beforeend", html);
+                }
+                /* ========= INIT FILTER ========= */
+                filteredItems = qFromUrl ? baseItems.filter(it => it.name.toLowerCase().includes(qFromUrl)) : baseItems;
+                grid.innerHTML = "";
+                cursor = 0;
+                renderNextBatch();
+                /* ========= SEARCH ========= */
+                searchInput.addEventListener("input", () => {
+                    const keyword = searchInput.value.trim().toLowerCase();
+                    filteredItems = keyword ? baseItems.filter(it => it.name.toLowerCase().includes(keyword)) : baseItems;
+                    grid.innerHTML = "";
+                    cursor = 0;
+                    renderNextBatch();
+                }
+                );
+                /* ========= INFINITE SCROLL ========= */
+                const sentinel = document.createElement("div");
+                sentinel.style.height = "1px";
+                grid.after(sentinel);
+                new IntersectionObserver(entries => {
+                    if (entries[0].isIntersecting) {
+                        renderNextBatch();
+                    }
+                }
+                ,{
+                    rootMargin: "400px"
+                }).observe(sentinel);
+            </script>
+            <!-- ===== LOAD BOTTOM BAR MODULE ===== -->
+            <script src="https://phamkhanh296hk-sudo.github.io/FlashSale-All/assets/menu.js"></script>
+            <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"a62640e5c38d44abacaaeed18f0a224d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+    </body>
+</div></html>
