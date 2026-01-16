@@ -143,7 +143,3 @@ Mọi đóng góp đều được chào đón! Vui lòng tạo issue hoặc pull
 
 MIT License
 
-## 🙏 Credits
-
-- Nguồn dữ liệu: [dealhotday.com](https://dealhotday.com)
-- Affiliate Platform: Shopee Affiliate
