@@ -432,7 +432,7 @@
 
 async function loadProducts() {
   try {
-    const response = await fetch('data/products.json');
+    const response = await fetch('products.json');
     if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
     ITEMS = await response.json();
     console.log(`✅ Loaded ${ITEMS.length} products`);
@@ -603,3 +603,4 @@ if (document.readyState === 'loading') {
             <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"a62640e5c38d44abacaaeed18f0a224d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
     </body>
 </div></html>
+
