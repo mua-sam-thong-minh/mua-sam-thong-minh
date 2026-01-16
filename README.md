@@ -1,10 +1,10 @@
 # 🚀 Hệ Thống Thu Thập & Chuyển Đổi Link Affiliate Shopee
 
-Hệ thống tự động thu thập dữ liệu FlashSale từ dealhotday.com, chuyển đổi thành link affiliate Shopee của bạn, và tự động cập nhật lên website.
+Hệ thống tự động thu thập dữ liệu FlashSale từ 123.com, chuyển đổi thành link affiliate Shopee của bạn, và tự động cập nhật lên website.
 
 ## 📋 Tính Năng
 
-- ✅ Thu thập dữ liệu FlashSale tự động từ dealhotday.com
+- ✅ Thu thập dữ liệu FlashSale tự động từ 123.com
 - ✅ Tái tạo link gốc Shopee từ shopid/itemid
 - ✅ Tích hợp với Shopee Affiliate Portal
 - ✅ Xuất JSON tự động cho website
@@ -85,7 +85,7 @@ git push
 ```
 AFF_SHOPPE/
 ├── src/
-│   ├── fetcher.py          # Thu thập dữ liệu từ dealhotday.com
+│   ├── fetcher.py          # Thu thập dữ liệu từ 123.com
 │   ├── parser.py           # Parse HTML/JSON
 │   ├── link_builder.py     # Tái tạo link gốc Shopee
 │   ├── exporter.py         # Xuất CSV
