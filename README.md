@@ -78,7 +78,7 @@ git push
 ### Nếu cần thu thập dữ liệu mới:
 
 ```bash
-# 1. Thu thập từ dealhotday.com (từ thư mục gốc)
+# 1. Thu thập từ 123.com (từ thư mục gốc)
 cd ..
 python main.py --stage 1
 
@@ -214,7 +214,7 @@ python update_html.py
 
 ### Nguồn Dữ Liệu
 
-- **Thu thập tự động:** Từ dealhotday.com (dùng hệ thống Python ở thư mục gốc)
+- **Thu thập tự động:** Từ 123.com (dùng hệ thống Python ở thư mục gốc)
 - **Thủ công:** Tạo file JSON theo format trên
 
 ## 🎨 Tùy Chỉnh Giao Diện
@@ -272,8 +272,8 @@ python -m http.server 8000
 
 ## � Liên Hệ
 
-- Telegram: https://t.me/dealhotday
-- Website: https://dealhotday.com
+- Telegram: https://t.me/123
+- Website: https://123.com
 
 ## 📝 License
 
