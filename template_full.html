@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="vi">
+<!-- BUILD_ID: 1768538101 -->
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <base href="/FlashSale-Shopee/">
+    <title>⚡ FlashSale Shopee</title>
+    <!-- Manrope (gần giống Lazada / Euclid Circular A) -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        /* =====================================================
+   GLOBAL
+===================================================== */
+        body {
+            font-family: "Manrope", sans-serif;
+            background: linear-gradient(180deg, #f53d2d 0%, #ee4d2d 100%);
+            min-height: 100vh;
+        }
+
+        /* =====================================================
+   MOBILE MODE = HTML 1 (DEFAULT)
+===================================================== */
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 8px;
+        }
+
+        /* HEADER WRAPPER */
+        .header-wrapper {
+            background: linear-gradient(135deg, #ee4d2d 0%, #f05123 100%);
+            padding: 16px 0;
+            margin: 0 -8px 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .15);
+        }
+
+        /* TITLE */
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 2.2rem;
+            margin: 0 0 8px;
+            font-weight: 800;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, .2);
+        }
+
+        .flash-note {
+            text-align: center;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #fff;
+            margin-bottom: 8px;
+        }
+
+        .flash-note strong {
+            color: #fff;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, .2);
+        }
+
+        .flash-note a {
+            color: #fff;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        /* =====================================================
+   FILTER – MOBILE
+===================================================== */
+        .panel {
+            background: #fff;
+            padding: 10px;
+            margin: 0 -8px 16px;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .08);
+        }
+
+        .grid-filter {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+
+        label {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        select,
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 0.95rem;
+            border: 1px solid #999;
+            border-radius: 8px;
+        }
+
+        /* ===== SELECT ARROW FIX – MOBILE ===== */
+        select {
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23666'><path d='M7 10l5 5 5-5z'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 8px center;
+            background-size: 24px;
+            /* 👈 CHÍNH LÀ CHỖ NÀY */
+            padding-right: 8px;
+            /* 👈 chừa chỗ cho mũi tên */
+        }
+
+        /* =====================================================
+   GRID – MOBILE
+===================================================== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+        }
+
+        /* =====================================================
+   CARD – MOBILE (HTML 1 CHUẨN)
+===================================================== */
+        .card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 0.8px solid #111;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            display: block;
+            /* 👈 bỏ flex-column cho mobile */
+        }
+
+        .card a {
+            aspect-ratio: 1 / 1;
+            /* 👈 ảnh vuông */
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 8px;
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 8px;
+        }
+
+        /* BADGE */
+        .badge {
+            position: absolute;
+            top: 4px;
+            left: 4px;
+            background: #e60000;
+            color: #fff;
+            font-size: 3.5cqw;
+            padding: 0.2em 0.4em;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        .shop-badge {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            background: #d0011b;
+            color: #fff;
+            font-size: .75rem;
+            padding: 3px 7px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+
+        /* MÀU SHOP BADGE */
+        .shop-badge.mall {
+            background: #d0011b;
+            /* 🔴 Mall */
+        }
+
+        .shop-badge.preferred,
+        .shop-badge.preferred-plus {
+            background: #ee4d2d;
+            /* 🟠 Yêu thích / Yêu thích + */
+        }
+
+        /* INFO */
+        .product-info {
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            flex: 0 0 auto;
+            /* 👈 chỉ cao đúng nội dung */
+            min-height: unset;
+            /* 👈 bỏ ép chiều cao */
+        }
+
+        .name {
+            font-size: .80rem;
+            font-weight: 700;
+            line-height: 1.3;
+            height: 2.6em;
+            /* 👈 KHÓA CỨNG 2 DÒNG */
+            overflow: hidden;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            /* 👈 CHỈ 2 DÒNG */
+            -webkit-box-orient: vertical;
+        }
+
+        .price-container {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+        }
+
+        .price {
+            font-size: 1.0rem;
+            font-weight: 800;
+            color: #d0011b;
+        }
+
+        .before {
+            font-size: .85rem;
+            color: #999;
+            text-decoration: line-through;
+        }
+
+        .meta {
+            font-size: .78rem;
+            color: #666;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            line-height: 1.4;
+            /* 👈 CHỐT: giữ chỗ cố định */
+            justify-content: flex-start;
+        }
+
+        .join-center {
+            position: relative;
+            width: fit-content;
+            margin: 10px auto;
+            /* 👈 CHỈ BUTTON ĐƯỢC CĂN GIỮA */
+        }
+
+        /* BUTTON */
+        .join-btn {
+            display: inline-block;
+            padding: 10px 18px;
+            font-size: 1rem;
+            font-weight: 700;
+            background: #1da1f2;
+            /* 🔵 XANH */
+            color: #fff;
+            border-radius: 8px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(29, 161, 242, .35);
+        }
+
+        /* BÀN TAY */
+        .hand {
+            position: absolute;
+            left: -40px;
+            /* 👈 NẰM CẠNH BUTTON */
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 22px;
+        }
+
+        /* =====================================================
+   DESKTOP MODE = HTML 1 (≥1025px)
+===================================================== */
+        @media (min-width: 1025px) {
+
+            /* BIẾN CHUNG */
+            :root {
+                --gap: clamp(10px, 1.5vw, 16px);
+                --col: calc((100% - 5 * var(--gap)) / 6);
+            }
+
+            /* CONTAINER */
+            .container {
+                max-width: calc(6 * var(--col) + 5 * var(--gap));
+                padding: 0;
+            }
+
+            /* HEADER WRAPPER DESKTOP */
+            .header-wrapper {
+                margin: 0 0 24px;
+                padding: 24px 0;
+            }
+
+            /* TITLE */
+            h1 {
+                font-size: 3.3rem;
+            }
+
+            .flash-note {
+                font-size: 1.35rem;
+                line-height: 1.6;
+            }
+
+            /* PANEL */
+            .panel {
+                padding: 16px;
+                border-radius: 12px;
+                width: 100%;
+                margin: 0 auto 20px;
+            }
+
+            /* FILTER */
+            .grid-filter {
+                grid-template-columns: 1fr 1fr;
+                gap: 24px 40px;
+            }
+
+            label {
+                font-size: 1.2vw;
+            }
+
+            select,
+            input {
+                width: calc(2 * var(--col) + var(--gap));
+                font-size: 1.2cqw;
+                padding: .6em .8em;
+            }
+
+            /* GRID */
+            .grid {
+                grid-template-columns: repeat(6, var(--col));
+                gap: var(--gap);
+            }
+
+            /* CARD DESKTOP */
+            .card {
+                border-radius: 15px;
+                padding: 8px;
+                border: 1.4px solid #000;
+                container-type: inline-size;
+                transition: transform .25s ease, box-shadow .25s ease;
+            }
+
+            .card a {
+                padding: 3%;
+            }
+
+            .card img {
+                object-fit: cover;
+                border-radius: 15px;
+            }
+
+            .card:hover {
+                transform: scale(1.04);
+                z-index: 5;
+                box-shadow: 0 14px 32px rgba(0, 0, 0, .18);
+            }
+
+            /* TEXT SCALE */
+            .name {
+                font-size: clamp(13px, 6cqw, 32px);
+            }
+
+            .price {
+                font-size: clamp(14px, 8cqw, 32px);
+            }
+
+            .before,
+            .meta {
+                font-size: clamp(14px, 7cqw, 36px);
+            }
+
+            /* BADGE DESKTOP */
+            .badge {
+                font-size: 6cqw;
+                padding: .4em .7em;
+                border-radius: 10px;
+            }
+        }
+
+        /* =====================================================
+   TO TOP
+===================================================== */
+        #toTop {
+            position: fixed;
+            bottom: 70px;
+            right: 16px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: #ee4d2d;
+            color: #fff;
+            border: none;
+            font-size: 1.6rem;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .2);
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Flashsale Shopee</h1>
+        <div class="flash-note">
+            ⚡ <strong>SĂN DEAL 1K, 9K, DEAL HOT, LỖI GIÁ </strong>
+            <br>
+
+        </div>
+
+        <form class="panel" onsubmit="return false;">
+            <div class="grid-filter">
+                <!-- <div>
+                    <label>Chọn khung giờ</label>
+                    <select name="slot"></select>
+                </div> -->
+                <div>
+                    <label>Tìm kiếm sản phẩm</label>
+                    <input name="q" value="">
+                </div>
+                <div>
+                    <label>Lọc theo</label>
+                    <select name="filter">
+                        <option value="all" selected>Mọi sản phẩm
+                        </option>
+                        <option value="mall">Shop Mall
+                        </option>
+                        <option value="remove_1k">Bỏ Deal 1K
+                        </option>
+                        <option value="rating49">Trên 4.9⭐
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </form>
+        <div class="grid" id="grid"></div>
+        <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+        <script>
+            const ITEMS = [];
+        </script>
+        <script>
+            const btn = document.getElementById("toTop");
+            window.addEventListener("scroll", () => {
+                btn.style.display = window.scrollY > 400 ? "block" : "none";
+            }
+            );
+        </script>
+        <script>
+            (async function () {
+                /* ========= ELEMENT ========= */
+                const slotSelect = document.querySelector("select[name='slot']");
+                const filterSelect = document.querySelector("select[name='filter']");
+                const input = document.querySelector("input[name='q']");
+                if (!slotSelect || !filterSelect || !input)
+                    return;
+                /* ========= LẤY STATE TỪ URL ========= */
+                const urlParams = new URLSearchParams(location.search);
+                const qFromUrl = urlParams.get("q") || "";
+                input.value = qFromUrl;
+                /* ========= SLOT / FILTER ========= */
+                const parts = location.pathname.split("/").filter(Boolean);
+                const currentSlot = parts.length >= 2 ? parts[parts.length - 2] : "";
+                const currentFilter = parts.length >= 1 ? parts[parts.length - 1].replace(".html", "") : "all";
+                // load slots.json
+                let slots = [];
+                try {
+                    const res = await fetch(`/FlashSale-Shopee/slots.json?v=1768538101`);
+                    slots = await res.json();
+                } catch (e) {
+                    console.error("Không load được slots.json", e);
+                    return;
+                }
+                // build slot dropdown
+                for (const s of slots) {
+                    const opt = document.createElement("option");
+                    opt.value = s.file;
+                    opt.textContent = s.label;
+                    if (s.file === currentSlot)
+                        opt.selected = true;
+                    slotSelect.appendChild(opt);
+                }
+                filterSelect.value = currentFilter;
+                /* ========= ĐỔI SLOT (GIỮ SEARCH) ========= */
+                function goToSlot() {
+                    const q = input.value.trim();
+                    const params = new URLSearchParams();
+                    if (q)
+                        params.set("q", q);
+                    const BASE = "/FlashSale-Shopee";
+                    const slot = slotSelect.value;
+                    const filter = filterSelect.value || "all";
+                    location.href = `${BASE}/${slot}/${filter}.html` + (params.toString() ? `?${params}` : "");
+                }
+                // Chỉ slot mới chuyển trang, filter sẽ xử lý ở script dưới
+                slotSelect.addEventListener("change", goToSlot);
+            }
+            )();
+        </script>
+        <script>
+            /* ========= ELEMENT ========= */
+            const grid = document.getElementById("grid");
+            const searchInput = document.querySelector("input[name='q']");
+            const filterSelect = document.querySelector("select[name='filter']");
+            /* ========= URL STATE ========= */
+            const urlParams = new URLSearchParams(location.search);
+            const qFromUrl = (urlParams.get("q") || "").toLowerCase();
+            /* ========= FILTER STATE ========= */
+            const parts = location.pathname.split("/").filter(Boolean);
+            const currentFilter = parts.length >= 1 ? parts[parts.length - 1].replace(".html", "") : "all";
+            /* ========= CONFIG ========= */
+            const BATCH_SIZE = 40;
+            let cursor = 0;
+            /* ========= DATA ========= */
+            let baseItems = ITEMS;
+            let filteredItems = [];
+
+            /* ========= FILTER FUNCTION ========= */
+            function applyFilters(items, keyword, filterType) {
+                let result = items;
+
+                // Lọc theo từ khóa tìm kiếm
+                if (keyword) {
+                    result = result.filter(it => it.name.toLowerCase().includes(keyword));
+                }
+
+                // Lọc theo loại filter
+                switch (filterType) {
+                    case "mall":
+                        // Chỉ lấy sản phẩm từ Shop Mall
+                        result = result.filter(it => it.is_mall === true);
+                        break;
+                    case "remove_1k":
+                        // Bỏ các deal 1K (giá > 1000đ)
+                        result = result.filter(it => it.price > 1000);
+                        break;
+                    case "rating49":
+                        // Chỉ lấy sản phẩm rating trên 4.9
+                        result = result.filter(it => it.rating > 4.9);
+                        break;
+                    case "all":
+                    default:
+                        // Không lọc gì thêm
+                        break;
+                }
+
+                return result;
+            }
+
+            /* ========= RENDER ========= */
+            function renderNextBatch() {
+                if (cursor >= filteredItems.length)
+                    return;
+                const slice = filteredItems.slice(cursor, cursor + BATCH_SIZE);
+                cursor += BATCH_SIZE;
+                const html = slice.map(it => `
+    <div class="card">
+      ${it.discount ? `<div class="badge">-${it.discount}%</div>` : ""}
+      ${it.is_mall ? `<div class="shop-badge mall">Mall</div>` : ""}
+      ${it.is_preferred_plus ? `<div class="shop-badge preferred-plus">Yêu thích +</div>` : ""}
+      ${it.is_preferred ? `<div class="shop-badge preferred">Yêu thích</div>` : ""}
+
+      <a href="${it.url}" target="_blank">
+        <img src="${it.img}" loading="lazy">
+      </a>
+
+      <!-- 👇 THÊM product-info -->
+      <div class="product-info">
+
+        <div class="name">${it.name}</div>
+
+        <div class="price-container">
+          <span class="price">${it.price.toLocaleString()}₫</span>
+          <span class="before">${it.before.toLocaleString()}₫</span>
+        </div>
+
+        <div class="meta">
+          <div>📦 Kho ${it.stock}</div>
+          <div>⭐ ${it.rating}/5 (${it.rating_count} đánh giá)</div>
+        </div>
+
+      </div>
+    </div>
+  `).join("");
+                grid.insertAdjacentHTML("beforeend", html);
+            }
+
+            /* ========= UPDATE DISPLAY ========= */
+            function updateDisplay() {
+                const keyword = searchInput.value.trim().toLowerCase();
+                const filterType = filterSelect.value || "all"; // Lấy từ dropdown thay vì URL
+                filteredItems = applyFilters(baseItems, keyword, filterType);
+                grid.innerHTML = "";
+                cursor = 0;
+                renderNextBatch();
+            }
+
+            /* ========= INIT FILTER ========= */
+            // Set giá trị filter từ URL lần đầu
+            filterSelect.value = currentFilter;
+            updateDisplay();
+
+            /* ========= SEARCH ========= */
+            let searchTimeout;
+            searchInput.addEventListener("input", () => {
+                // Cập nhật hiển thị ngay lập tức
+                updateDisplay();
+
+                // Debounce cập nhật URL (sau 500ms không gõ nữa)
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    const q = searchInput.value.trim();
+                    const params = new URLSearchParams();
+                    if (q) params.set("q", q);
+
+                    const newUrl = location.pathname + (params.toString() ? `?${params}` : "");
+                    // Cập nhật URL mà không reload trang
+                    history.replaceState(null, "", newUrl);
+                }, 500);
+            });
+
+            /* ========= FILTER CHANGE ========= */
+            filterSelect.addEventListener("change", updateDisplay);
+
+            /* ========= INFINITE SCROLL ========= */
+            const sentinel = document.createElement("div");
+            sentinel.style.height = "1px";
+            grid.after(sentinel);
+            new IntersectionObserver(entries => {
+                if (entries[0].isIntersecting) {
+                    renderNextBatch();
+                }
+            }
+                , {
+                    rootMargin: "400px"
+                }).observe(sentinel);
+        </script>
+        <!-- ===== LOAD BOTTOM BAR MODULE ===== -->
+
+        <script defer
+            src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015"
+            integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ=="
+            data-cf-beacon='{"version":"2024.11.0","token":"a62640e5c38d44abacaaeed18f0a224d","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}'
+            crossorigin="anonymous"></script>
+</body>
+</div>
+
+</html>

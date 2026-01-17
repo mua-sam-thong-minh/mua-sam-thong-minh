@@ -16,13 +16,13 @@ MAX_RETRIES = int(os.getenv('MAX_RETRIES', 3))
 REQUEST_DELAY = int(os.getenv('REQUEST_DELAY', 1))
 
 
-def fetch_flashsale_data(date: str, time_slot: str) -> str:
+def fetch_flashsale_data(date: Optional[str] = None, time_slot: Optional[str] = None) -> str:
     """
     Lấy dữ liệu FlashSale từ dealhotday.com
     
     Args:
-        date: Định dạng DD.MM.YYYY (VD: "16.01.2026")
-        time_slot: Khung giờ (VD: "17.00")
+        date: Định dạng DD.MM.YYYY (VD: "16.01.2026"). Nếu None, sẽ lấy từ URL mặc định
+        time_slot: Khung giờ (VD: "17.00"). Nếu None, sẽ lấy từ URL mặc định
     
     Returns:
         HTML content chứa JSON nhúng
@@ -30,7 +30,11 @@ def fetch_flashsale_data(date: str, time_slot: str) -> str:
     Raises:
         requests.RequestException: Khi request thất bại sau MAX_RETRIES lần
     """
-    url = f"https://dealhotday.com/FlashSale-Shopee/{date}-{time_slot}/all"
+    # Nếu không truyền date và time_slot, dùng URL mặc định
+    if date is None or time_slot is None:
+        url = "https://dealhotday.com/FlashSale-Shopee/"
+    else:
+        url = f"https://dealhotday.com/FlashSale-Shopee/{date}-{time_slot}/all"
     ua = UserAgent()
     
     headers = {

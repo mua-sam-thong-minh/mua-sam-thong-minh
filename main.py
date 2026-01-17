@@ -29,13 +29,14 @@ def print_banner():
     print()
 
 
-def stage_1_collect(date: str = None, time_slot: str = None):
+def stage_1_collect(date: str = None, time_slot: str = None, use_default: bool = False):
     """
     GIAI ĐOẠN 1: Thu thập & Sơ chế dữ liệu
     
     Args:
         date: Ngày (DD.MM.YYYY), None = hôm nay
         time_slot: Khung giờ (HH.MM), None = auto detect
+        use_default: Sử dụng URL mặc định (https://dealhotday.com/FlashSale-Shopee/)
     """
     print("\n" + "=" * 70)
     print("📥 GIAI ĐOẠN 1: THU THẬP & SƠ CHẾ DỮ LIỆU")
@@ -43,7 +44,10 @@ def stage_1_collect(date: str = None, time_slot: str = None):
     
     try:
         # Bước 1: Fetch HTML
-        if date and time_slot:
+        if use_default:
+            print("🔗 Sử dụng URL mặc định: https://dealhotday.com/FlashSale-Shopee/")
+            html = fetch_flashsale_data()  # Không truyền tham số
+        elif date and time_slot:
             html = fetch_flashsale_data(date, time_slot)
         else:
             html = fetch_current_flashsale()
@@ -228,6 +232,11 @@ def main():
         help='Khung giờ (HH.MM), mặc định: auto detect'
     )
     parser.add_argument(
+        '--default',
+        action='store_true',
+        help='Sử dụng URL mặc định (https://dealhotday.com/FlashSale-Shopee/)'
+    )
+    parser.add_argument(
         '--all',
         action='store_true',
         help='Chạy tất cả 3 giai đoạn (yêu cầu converted_links.csv đã sẵn sàng)'
@@ -239,8 +248,9 @@ def main():
     if not any([args.stage, args.all]):
         parser.print_help()
         print("\n💡 VÍ DỤ SỬ DỤNG:")
-        print("   python main.py --stage 1                    # Chạy Giai đoạn 1")
-        print("   python main.py --stage 1 --date 16.01.2026 --time 17.00")
+        print("   python main.py --stage 1                    # Chạy Giai đoạn 1 (auto detect)")
+        print("   python main.py --stage 1 --default          # Sử dụng URL mặc định")
+        print("   python main.py --stage 1 --date 16.01.2026 --time 17.00  # Chỉ định ngày giờ")
         print("   python main.py --stage 2                    # Chạy Giai đoạn 2")
         print("   python main.py --stage 3                    # Chạy Giai đoạn 3")
         return
@@ -248,14 +258,14 @@ def main():
     # Chạy theo stage
     if args.all:
         print("⚠️  Chế độ --all yêu cầu file converted_links.csv đã sẵn sàng!")
-        success = stage_1_collect(args.date, args.time)
+        success = stage_1_collect(args.date, args.time, args.default)
         if success:
             input("\n⏸️  Nhấn Enter sau khi đã upload converted_links.csv...")
             success = stage_2_merge()
             if success:
                 stage_3_export()
     elif args.stage == 1:
-        stage_1_collect(args.date, args.time)
+        stage_1_collect(args.date, args.time, args.default)
     elif args.stage == 2:
         stage_2_merge()
     elif args.stage == 3:

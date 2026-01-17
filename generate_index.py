@@ -113,7 +113,7 @@ def main():
     
     # Đường dẫn files
     products_file = Path("data/products.json")
-    template_file = Path("⚡ FlashSale Shopee.html")
+    template_file = Path("template_full.html")
     output_file = Path("index.html")  # File cho GitHub Pages
     
     # Kiểm tra files
