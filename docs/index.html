@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Săn Deal 1K Mỗi Ngày</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon-96x96.png">
+    <link rel="manifest" href="site.webmanifest">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF69B4;
+            --primary-dark: #FF1493;
+            --accent: #FFB6C1;
+            --bg-gradient-start: #FFE5EC;
+            --bg-gradient-end: #E6E6FA;
+            --text-dark: #222;
+            --text-gray: #666;
+            --card-radius: 18px;
+            --shadow-soft: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 12px 40px rgba(0, 0, 0, 0.12);
+            --shadow-hover: 0 16px 48px rgba(0, 0, 0, 0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            color: var(--text-dark);
+            padding-bottom: 40px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== HEADER (CẬP NHẬT BỐ CỤC) ===== */
+        .header-bg {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 20px 24px;
+            border-radius: var(--card-radius);
+            margin: 20px 20px 24px;
+            box-shadow: var(--shadow-soft);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        /* ===== BRANDING (CẬP NHẬT: CĂN TRÁI) ===== */
+        .branding {
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            gap: 16px;
+            flex-shrink: 0;
+        }
+
+        .logo {
+            width: 54px;
+            height: 54px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            /* Bóng logo hồng nhẹ */
+            box-shadow: 0 4px 12px rgba(255, 105, 180, 0.25);
+            flex-shrink: 0;
+            overflow: hidden;
+            background: #fff;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .brand-text h1 {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0;
+            color: #1a1a1a;
+            line-height: 1.2;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        .slogan {
+            font-family: 'Poppins', 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #888;
+            margin: 2px 0 0 0;
+            letter-spacing: 0.3px;
+        }
+
+        /* ===== TICKER (SOCIAL PROOF) ===== */
+        .ticker-wrapper {
+            background: linear-gradient(135deg, #fff5f7 0%, #f0f4ff 100%);
+            border: 1px solid rgba(255, 105, 180, 0.15);
+            color: #555;
+            padding: 8px 0;
+            overflow: hidden;
+            flex: 1;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .ticker {
+            display: inline-block;
+            white-space: nowrap;
+            animation: ticker 30s linear infinite;
+            padding-left: 100%;
+        }
+
+        @keyframes ticker {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+
+            100% {
+                transform: translate3d(-100%, 0, 0);
+            }
+        }
+
+        /* ===== COUNTDOWN TIMER ===== */
+        .countdown-section {
+            text-align: center;
+            margin: 0 20px 30px;
+            padding: 20px;
+            background: #fff;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow-soft);
+            animation: popIn 0.5s ease-out;
+        }
+
+        .countdown-label {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .timer-box {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Courier New', Courier, monospace;
+        }
+
+        .time-block {
+            background-color: #333;
+            color: #fff;
+            font-size: 1.25rem;
+            padding: 6px 4px;
+            min-width: 40px;
+            border-radius: 4px;
+            font-weight: 700;
+            line-height: 1;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+        }
+
+        .colon {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #333;
+            margin-top: -4px;
+        }
+
+        @keyframes popIn {
+            0% {
+                transform: scale(0.8);
+                opacity: 0;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* ===== STICKY FILTER BAR ===== */
+        .sticky-filter-wrapper {
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+            background: #fff;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow-soft);
+            padding: 16px;
+            margin: 0 20px 30px;
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            align-items: center;
+            scrollbar-width: none;
+        }
+
+        .filter-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .search-group {
+            position: relative;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-group input {
+            width: 100%;
+            padding: 10px 40px 10px 40px;
+            border: 1px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            background: #f9f9f9;
+            transition: all 0.3s;
+        }
+
+        .search-group input:focus {
+            background: #fff;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(238, 77, 45, 0.1);
+            outline: none;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        /* NÚT XÓA (CLEAR BUTTON) */
+        .search-clear {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #d9d9d9;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-family: Arial, sans-serif;
+            line-height: 1;
+            padding-bottom: 2px;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.2s ease;
+            z-index: 5;
+        }
+
+        .search-clear:hover {
+            background: #a6a6a6;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .search-clear.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .filter-chips {
+            display: flex;
+            gap: 8px;
+        }
+
+        .chip {
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid #e0e0e0;
+            background: #fff;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-gray);
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+            user-select: none;
+        }
+
+        .chip:hover {
+            background: #f0f0f0;
+        }
+
+        .chip.active {
+            background: #ffebe8;
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        /* ===== TIMELINE ===== */
+        .timeline {
+            display: flex;
+            gap: 12px;
+            overflow-x: auto;
+            padding: 20px;
+            margin: 0 20px 30px;
+            background: #fff;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow-soft);
+            scrollbar-width: thin;
+        }
+
+        .timeline-slot {
+            flex: 0 0 auto;
+            min-width: 110px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0.7;
+            transform: scale(0.95);
+        }
+
+        .timeline-slot.active {
+            opacity: 1;
+            transform: scale(1);
+            background: linear-gradient(135deg, #222 0%, #000 100%);
+            color: #fff;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline-slot.active .slot-time {
+            color: var(--accent);
+        }
+
+        .slot-time {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #333;
+        }
+
+        /* ===== GRID LAYOUT ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            padding: 20px;
+            margin: 0 20px;
+            background: #fff;
+            border-radius: var(--card-radius);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* ===== PRODUCT CARD ===== */
+        .card {
+            background: #fff;
+            border-radius: var(--card-radius);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(238, 77, 45, 0.2);
+            z-index: 2;
+        }
+
+        .card-img-wrapper {
+            position: relative;
+            padding-top: 100%;
+            overflow: hidden;
+        }
+
+        .card img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.08);
+        }
+
+        .badge-sale {
+            position: absolute;
+            top: 0;
+            right: 0;
+            background: rgba(255, 212, 36, 0.95);
+            color: #000;
+            font-weight: 700;
+            font-size: 0.8rem;
+            padding: 4px 8px;
+            border-bottom-left-radius: 10px;
+            z-index: 2;
+        }
+
+        .badge-mall {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: #d0011b;
+            color: white;
+            font-size: 0.7rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+            z-index: 2;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-info {
+            padding: 12px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .name {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            color: var(--text-dark);
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            height: 2.8em;
+        }
+
+        .price-group {
+            display: flex;
+            align-items: flex-end;
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .price-current {
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 800;
+        }
+
+        .price-old {
+            color: #999;
+            font-size: 0.8rem;
+            text-decoration: line-through;
+            margin-bottom: 2px;
+        }
+
+        .stock-wrapper {
+            position: relative;
+            height: 16px;
+            background: #fcdbd6;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+
+        .stock-fill {
+            height: 100%;
+            background: linear-gradient(45deg, #ee4d2d 25%, #ff6b6b 25%, #ff6b6b 50%, #ee4d2d 50%, #ee4d2d 75%, #ff6b6b 75%, #ff6b6b 100%);
+            background-size: 20px 20px;
+            border-radius: 10px;
+            transition: width 0.5s;
+            animation: moveStripes 2s linear infinite;
+        }
+
+        @keyframes moveStripes {
+            0% {
+                background-position: 0 0;
+            }
+
+            100% {
+                background-position: 20px 20px;
+            }
+        }
+
+        .stock-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.65rem;
+            color: #fff;
+            font-weight: 700;
+            text-transform: uppercase;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-buy {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            font-weight: 700;
+            border-radius: 8px;
+            text-decoration: none;
+            position: relative;
+            overflow: hidden;
+            transition: background 0.2s;
+        }
+
+        .btn-buy:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-buy::after {
+            content: "";
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.3) 50%, rgba(255, 255, 255, 0) 100%);
+            transform: rotate(30deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) rotate(30deg);
+            }
+
+            20% {
+                transform: translateX(100%) rotate(30deg);
+            }
+
+            100% {
+                transform: translateX(100%) rotate(30deg);
+            }
+        }
+
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ===== SKELETON LOADER ===== */
+        .skeleton {
+            background: #eee;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .skeleton-img {
+            width: 100%;
+            padding-top: 100%;
+            animation: pulse 1.5s infinite;
+        }
+
+        .skeleton-line {
+            height: 14px;
+            margin: 8px 12px;
+            width: 80%;
+            background: #ddd;
+            animation: pulse 1.5s infinite;
+        }
+
+        .skeleton-btn {
+            height: 30px;
+            margin: 12px;
+            background: #ddd;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.6;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .grid {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 16px;
+            }
+
+            h1 {
+                font-size: 3rem;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid {
+                grid-template-columns: repeat(5, 1fr);
+                gap: 20px;
+            }
+
+            .container {
+                padding: 0;
+            }
+        }
+
+        #toTop {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: #333;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            display: none;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 99;
+            transition: transform 0.2s;
+        }
+
+        #toTop:hover {
+            transform: translateY(-5px);
+            background: var(--primary);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-bg">
+        <div class="branding">
+            <div class="logo">
+                <img src="web-app-manifest-192x192.png" alt="Logo">
+            </div>
+            <div class="brand-text">
+                <h1>SĂN SALE 1K</h1>
+                <p class="slogan">Best Deals Daily</p>
+            </div>
+        </div>
+        <div class="ticker-wrapper">
+            <div class="ticker" id="ticker"></div>
+        </div>
+    </div>
+
+    <div class="sticky-filter-wrapper">
+        <div class="filter-container">
+            <div class="search-group">
+                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" placeholder="Tìm tên sản phẩm...">
+                <span class="search-clear" id="searchClear">×</span>
+            </div>
+
+            <div class="filter-chips">
+                <div class="chip active" data-filter="all">Tất cả</div>
+                <div class="chip" data-filter="deal1k">⚡ Deal 1K</div>
+                <div class="chip" data-filter="deal9k">💰 Deal 9K</div>
+                <div class="chip" data-filter="deepsale">🔥 Giảm giá sâu</div>
+                <div class="chip" data-filter="mall">Shop Mall</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="countdown-section" id="countdownWrapper" style="display: none;">
+            <div class="countdown-label">
+                <span style="font-size:1.1rem; margin-right: 5px">🔥</span> KẾT THÚC TRONG
+            </div>
+            <div class="timer-box">
+                <div class="time-block" id="h">00</div>
+                <div class="colon">:</div>
+                <div class="time-block" id="m">00</div>
+                <div class="colon">:</div>
+                <div class="time-block" id="s">00</div>
+            </div>
+        </div>
+
+        <div class="timeline" id="timeline"></div>
+
+        <div class="grid" id="grid">
+        </div>
+    </div>
+
+    <button id="toTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">▲</button>
+
+    <script>
+        // --- CẤU HÌNH ---
+        let allProducts = [];
+        let filteredItems = [];
+        let cursor = 0;
+        const BATCH_SIZE = 20;
+        let currentFilter = 'all';
+
+        const grid = document.getElementById("grid");
+        const timeline = document.getElementById("timeline");
+        const chips = document.querySelectorAll('.chip');
+        const searchInput = document.getElementById('searchInput');
+        const searchClear = document.getElementById('searchClear');
+
+        // --- RENDER SKELETON ---
+        function renderSkeleton() {
+            let html = '';
+            for (let i = 0; i < 10; i++) {
+                html += `
+                <div class="skeleton">
+                    <div class="skeleton-img"></div>
+                    <div class="skeleton-line"></div>
+                    <div class="skeleton-line" style="width: 50%"></div>
+                    <div class="skeleton-btn"></div>
+                </div>`;
+            }
+            grid.innerHTML = html;
+        }
+
+        // --- RENDER PRODUCTS ---
+        function renderNextBatch() {
+            if (cursor >= filteredItems.length) return;
+            const slice = filteredItems.slice(cursor, cursor + BATCH_SIZE);
+            if (cursor === 0) grid.innerHTML = "";
+
+            const html = slice.map((it, index) => {
+                const percent = it.stock > 100 ? 10 : (it.stock > 50 ? 50 : 90);
+                const delay = (index % BATCH_SIZE) * 50;
+
+                return `
+                <div class="card fade-in-up" style="animation-delay: ${delay}ms">
+                    ${it.is_mall ? `<div class="badge-mall">Mall</div>` : ""}
+                    ${it.discount ? `<div class="badge-sale">-${it.discount}%</div>` : ""}
+                    
+                    <a href="${it.url}" target="_blank" class="card-img-wrapper">
+                        <img src="${it.img}" loading="lazy" alt="${it.name}">
+                    </a>
+
+                    <div class="product-info">
+                        <div class="name">${it.name}</div>
+                        
+                        <div class="price-group">
+                            <span class="price-current">${it.price.toLocaleString()}₫</span>
+                            ${it.price < it.before ? `<span class="price-old">${it.before.toLocaleString()}₫</span>` : ''}
+                        </div>
+
+                        <div class="stock-wrapper">
+                            <div class="stock-fill" style="width: ${percent}%"></div>
+                            <div class="stock-text">
+                                ${it.stock < 20 ? `🔥 Chỉ còn ${it.stock}` : 'Đang bán chạy'}
+                            </div>
+                        </div>
+
+                        <a href="${it.url}" target="_blank" class="btn-buy">MUA NGAY</a>
+                    </div>
+                </div>
+                `;
+            }).join("");
+
+            cursor += BATCH_SIZE;
+            grid.insertAdjacentHTML("beforeend", html);
+        }
+
+        // --- FILTER LOGIC ---
+        function applyFilters() {
+            const keyword = searchInput.value.toLowerCase().trim();
+            if (keyword.length > 0) {
+                searchClear.classList.add('visible');
+            } else {
+                searchClear.classList.remove('visible');
+            }
+
+            filteredItems = allProducts.filter(it => {
+                const matchName = it.name.toLowerCase().includes(keyword);
+                let matchType = true;
+
+                if (currentFilter === 'mall') {
+                    matchType = it.is_mall;
+                }
+                else if (currentFilter === 'deal1k') {
+                    matchType = it.price <= 1000;
+                }
+                else if (currentFilter === 'deal9k') {
+                    matchType = it.price === 9000;
+                }
+                else if (currentFilter === 'deepsale') {
+                    matchType = (it.before - it.price) > 0; // Có giảm giá
+                }
+                else if (currentFilter === 'deepsale_pro') {
+                    // Loại bỏ deal 1K và 9K
+                    if (it.price <= 90000) {
+                        matchType = false;
+                    } else {
+                        // Phải có giảm giá và % giảm >= 60%
+                        const discount = it.before - it.price;
+                        const discountPercent = (discount / it.before) * 100;
+                        matchType = discount > 0 && discountPercent >= 60;
+                    }
+                }
+                else if (currentFilter === 'rating') {
+                    matchType = it.rating >= 4.8;
+                }
+
+                return matchName && matchType;
+            });
+
+            // Sắp xếp theo chênh lệch giá nếu filter = deepsale
+            if (currentFilter === 'deepsale') {
+                filteredItems.sort((a, b) => {
+                    const discountA = a.before - a.price;
+                    const discountB = b.before - b.price;
+                    return discountB - discountA; // Giảm dần (chênh lệch lớn nhất lên đầu)
+                });
+            }
+
+            // Sắp xếp kết hợp cho deepsale_pro: % giảm giá + chênh lệch tuyệt đối
+            if (currentFilter === 'deepsale_pro') {
+                filteredItems.sort((a, b) => {
+                    const discountA = a.before - a.price;
+                    const discountB = b.before - b.price;
+                    const percentA = (discountA / a.before) * 100;
+                    const percentB = (discountB / b.before) * 100;
+
+                    // Ưu tiên % giảm giá, sau đó đến chênh lệch tuyệt đối
+                    if (Math.abs(percentB - percentA) > 5) {
+                        return percentB - percentA; // % cao hơn lên đầu
+                    } else {
+                        return discountB - discountA; // Chênh lệch lớn hơn lên đầu
+                    }
+                });
+            }
+
+            cursor = 0;
+            renderNextBatch();
+        }
+
+        chips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                chips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                currentFilter = chip.dataset.filter;
+                applyFilters();
+            });
+        });
+
+        let timeout;
+        searchInput.addEventListener('input', () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(applyFilters, 300);
+        });
+
+        searchClear.addEventListener('click', () => {
+            searchInput.value = '';
+            searchInput.focus();
+            applyFilters();
+        });
+
+        window.addEventListener('scroll', () => {
+            if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight - 500) {
+                renderNextBatch();
+            }
+            document.getElementById("toTop").style.display = window.scrollY > 400 ? "block" : "none";
+        });
+
+        async function loadData(file) {
+            renderSkeleton();
+            try {
+                const res = await fetch(`products_${file}.json?v=${Date.now()}`);
+                allProducts = await res.json();
+                applyFilters();
+            } catch (e) {
+                grid.innerHTML = '<p style="text-align:center; grid-column:span 5">Lỗi tải dữ liệu.</p>';
+            }
+        }
+
+        // --- LOGIC ĐẾM NGƯỢC (TÌM FLASH SALE KẾ TIẾP TỪ SLOTS.JSON) ---
+        function startCountdown(slots) {
+            const wrapper = document.getElementById('countdownWrapper');
+            const elH = document.getElementById('h');
+            const elM = document.getElementById('m');
+            const elS = document.getElementById('s');
+
+            if (!slots || slots.length === 0) return;
+
+            // Tìm slot kế tiếp
+            function getNextSlot() {
+                const now = new Date();
+
+                for (const slot of slots) {
+                    // Parse slot.file: "20.01.2026-15.00"
+                    const [datePart, timePart] = slot.file.split('-');
+                    const [day, month, year] = datePart.split('.');
+                    const [hour, minute] = timePart.split('.');
+
+                    const slotTime = new Date(year, month - 1, day, hour, minute);
+
+                    // Nếu slot này trong tương lai, đó là slot kế tiếp
+                    if (slotTime > now) {
+                        return slotTime.getTime();
+                    }
+                }
+
+                // Nếu không có slot nào trong tương lai, ẩn countdown
+                return null;
+            }
+
+            let endTime = getNextSlot();
+
+            if (!endTime) {
+                wrapper.style.display = 'none';
+                return;
+            }
+
+            wrapper.style.display = 'block';
+
+            const interval = setInterval(() => {
+                const now = new Date().getTime();
+                const distance = endTime - now;
+
+                if (distance < 0) {
+                    // Tìm slot tiếp theo
+                    endTime = getNextSlot();
+                    if (!endTime) {
+                        clearInterval(interval);
+                        wrapper.style.display = 'none';
+                        return;
+                    }
+                }
+
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                elH.innerText = hours < 10 ? "0" + hours : hours;
+                elM.innerText = minutes < 10 ? "0" + minutes : minutes;
+                elS.innerText = seconds < 10 ? "0" + seconds : seconds;
+            }, 1000);
+        }
+
+        // --- INIT ---
+        (async function init() {
+            const ticker = document.getElementById("ticker");
+
+            // Logic ticker động: số người tăng từ 10 -> 3000 trong ngày
+            function updateTicker() {
+                const now = new Date();
+                const hours = now.getHours();
+                const minutes = now.getMinutes();
+
+                // Tính % ngày đã trôi qua (0-100)
+                const dayProgress = ((hours * 60 + minutes) / (24 * 60)) * 100;
+
+                // Số người: 10 -> 3000
+                const baseUsers = 10;
+                const maxUsers = 3000;
+                const currentUsers = Math.floor(baseUsers + (maxUsers - baseUsers) * (dayProgress / 100));
+
+                // Thêm random nhỏ để số liệu "nhảy"
+                const usersWithRandom = currentUsers + Math.floor(Math.random() * 50);
+
+                ticker.textContent = `🔥 Có ${usersWithRandom.toLocaleString()} người đang săn deal tại đây • ⚡ Deal 1K sẽ hết trong vài phút nữa • 🚚 Freeship Xtra cho đơn từ 0Đ • 🎁 Quà tặng 0Đ cho đơn hàng đầu tiên • ⚡ Săn ngay kẻo lỡ!`;
+            }
+
+            // Cập nhật lần đầu
+            updateTicker();
+
+            // Cập nhật mỗi 10 giây
+            setInterval(updateTicker, 10000);
+
+            try {
+                const res = await fetch(`slots.json?v=${Date.now()}`);
+                const slots = await res.json();
+
+                // Khởi động countdown với slots
+                startCountdown(slots);
+
+                // Hàm tìm slot đang diễn ra dựa trên thời gian thực
+                function findCurrentSlot() {
+                    const now = new Date();
+                    let nextSlotIndex = -1;
+                    let minTimeDiff = Infinity;
+
+                    for (let i = 0; i < slots.length; i++) {
+                        const slot = slots[i];
+                        // Parse slot.file: "20.01.2026-15.00"
+                        const [datePart, timePart] = slot.file.split('-');
+                        const [day, month, year] = datePart.split('.');
+                        const [hour, minute] = timePart.split('.');
+
+                        const slotStart = new Date(year, month - 1, day, hour, minute);
+                        const slotEnd = new Date(slotStart.getTime() + 3 * 60 * 60 * 1000); // +3 giờ
+
+                        // Ưu tiên 1: Nếu slot đang diễn ra, return ngay
+                        if (now >= slotStart && now < slotEnd) {
+                            return i;
+                        }
+
+                        // Ưu tiên 2: Tìm slot sắp tới gần nhất (trong tương lai)
+                        if (slotStart > now) {
+                            const timeDiff = slotStart - now;
+                            if (timeDiff < minTimeDiff) {
+                                minTimeDiff = timeDiff;
+                                nextSlotIndex = i;
+                            }
+                        }
+                    }
+
+                    // Nếu có slot sắp tới, return slot đó
+                    if (nextSlotIndex !== -1) {
+                        return nextSlotIndex;
+                    }
+
+                    // Nếu tất cả slot đã kết thúc, return slot cuối cùng
+                    return slots.length - 1;
+                }
+
+                // Hàm cập nhật UI timeline
+                function updateTimeline(activeIndex) {
+                    const now = new Date();
+
+                    slots.forEach((s, idx) => {
+                        const div = timeline.children[idx];
+                        if (!div) return;
+
+                        // Parse thời gian slot
+                        const [datePart, timePart] = s.file.split('-');
+                        const [day, month, year] = datePart.split('.');
+                        const [hour, minute] = timePart.split('.');
+                        const slotStart = new Date(year, month - 1, day, hour, minute);
+                        const slotEnd = new Date(slotStart.getTime() + 3 * 60 * 60 * 1000);
+
+                        // Xác định trạng thái
+                        let status = '';
+                        let isActive = false;
+
+                        if (now >= slotStart && now < slotEnd) {
+                            status = '🔥 Đang diễn ra';
+                            isActive = true;
+                        } else if (now < slotStart) {
+                            status = '⏰ Sắp tới';
+                            // Nếu đây là slot được chọn (sắp tới gần nhất), active nó
+                            if (idx === activeIndex) {
+                                isActive = true;
+                            }
+                        } else {
+                            status = '✅ Đã kết thúc';
+                            // Nếu tất cả slot đã kết thúc và đây là slot cuối, active nó
+                            if (idx === activeIndex) {
+                                isActive = true;
+                            }
+                        }
+
+                        // Cập nhật class active
+                        if (isActive) {
+                            div.classList.add('active');
+                        } else {
+                            div.classList.remove('active');
+                        }
+
+                        div.innerHTML = `<div class="slot-time">${s.label}</div><div style="font-size:0.8rem">${status}</div>`;
+                    });
+                }
+
+                // Render timeline ban đầu
+                slots.forEach((s, idx) => {
+                    const div = document.createElement('div');
+                    div.className = 'timeline-slot';
+                    div.dataset.file = s.file;
+                    div.onclick = () => {
+                        document.querySelectorAll('.timeline-slot').forEach(el => el.classList.remove('active'));
+                        div.classList.add('active');
+                        loadData(s.file);
+                    };
+                    timeline.appendChild(div);
+                });
+
+                // Load slot hiện tại
+                const currentIndex = findCurrentSlot();
+
+                // Cập nhật timeline với slot hiện tại
+                updateTimeline(currentIndex);
+
+                if (slots.length > 0) {
+                    loadData(slots[currentIndex].file);
+                }
+
+                // Tự động cập nhật timeline mỗi 30 giây
+                let lastActiveIndex = currentIndex;
+                setInterval(() => {
+                    const newActiveIndex = findCurrentSlot();
+                    updateTimeline(newActiveIndex);
+
+                    // Nếu slot thay đổi, tự động load sản phẩm mới
+                    if (newActiveIndex !== lastActiveIndex) {
+                        console.log(`🔄 Tự động chuyển sang slot: ${slots[newActiveIndex].label}`);
+                        loadData(slots[newActiveIndex].file);
+                        lastActiveIndex = newActiveIndex;
+                    }
+                }, 30000); // Kiểm tra mỗi 30 giây
+
+            } catch (e) {
+                console.error('Lỗi load slots:', e);
+            }
+        })();
+    </script>
+</body>
+
+</html>
